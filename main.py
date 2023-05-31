@@ -15,27 +15,26 @@ ctk.set_default_color_theme("blue")  # Set default color theme to blue
 
 # Create the root window
 app = ctk.CTk()  # create CTk window like you do with the Tk window
-# Hide the window initially
-app.withdraw()
-
-app.geometry("350x400")
 app.resizable(False, False)
 app.title("Yes Copy")
+app.geometry("350x400")
+
+
+def show_window(event):
+    # Get the current mouse position
+    mouse_x = app.winfo_pointerx()
+    mouse_y = app.winfo_pointery()
+
+    # Calculate the window position relative to the mouse
+    window_x = mouse_x - app.winfo_width() // 2
+    window_y = mouse_y - app.winfo_height() // 2
+
+    # Set the window position
+    app.geometry(f"+{window_x}+{window_y}")
+
+
 # Remove the window decoration
-app.overrideredirect(True)
-
-# Get the current mouse position
-mouse_x = app.winfo_pointerx()
-mouse_y = app.winfo_pointery()
-
-# Calculate the window position relative to the mouse
-window_x = mouse_x - app.winfo_width() // 2
-window_y = mouse_y - app.winfo_height() // 2
-
-# Set the window position
-app.geometry(f"+{window_x}+{window_y}")
-
-# Show the window
-app.deiconify()
-
+# app.overrideredirect(True)
+app.bind("<Control-Shift-V>", show_window)
+app.protocol("WM_DELETE_WINDOW", app.iconify)
 app.mainloop()
