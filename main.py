@@ -22,25 +22,8 @@ app.title("Yes Copy")
 app.geometry("350x400")
 app.protocol("WM_DELETE_WINDOW", app.iconify)
 app.withdraw()
-scrollable_frame = ctk.CTkScrollableFrame(master=app, width=320, height=400)
-scrollable_frame.grid(row=0, column=0, padx=20, pady=20)
-
-
-def handle_copy_interrupt():
-    pass
-
-
-def handle_paste_interrupt():
-    pass
-
-
-def check_clipboard():
-    print()
-
-
-def set_clip_head():
-    pass
-
+app.my_frame = ctk.CTkScrollableFrame(master=app, width=320, height=390)
+app.my_frame.grid(row=0, column=0, padx=5, pady=5, sticky="nsew")
 
 def populate_clipboard():
     with open('clip.json') as file:
@@ -62,8 +45,6 @@ def populate_clipboard():
             rel_y += 0.14
 
 
-
-
 def show_window():
     # Get the current mouse position
     mouse_x = app.winfo_pointerx()
@@ -73,9 +54,7 @@ def show_window():
     window_x = mouse_x - app.winfo_width() // 2
     window_y = mouse_y - app.winfo_height() // 2
 
-    # Set the window position
     app.geometry(f"+{window_x}+{window_y}")
-    app.overrideredirect(True)
     app.deiconify()
     populate_clipboard()
 
