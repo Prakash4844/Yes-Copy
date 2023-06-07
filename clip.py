@@ -5,6 +5,8 @@ from tkinter import *
 class ClipBoard(CTk):
     def __init__(self):
         super().__init__()
+        set_appearance_mode("System")  # Set appearance mode to system
+        set_default_color_theme("blue")  # Set default color theme to blue
         self.title("Yes Copy")
         self.geometry("350x400")
         self.resizable(False, False)
