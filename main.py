@@ -23,6 +23,17 @@ with open('clip.json') as file:
 # Create the root window
 app = clip.ClipBoard(data)
 
+tabview = ctk.CTkTabview(app, width=330, height=390)
+
+tabview.pack()
+
+tabview.add("Clipboard")  # add tab at the end
+tabview.add("Saved Items")  # add tab at the end
+
+tabview.set("Clipboard")  # set currently visible tab
+
+
+app.populate_clipboard(target_tab=tabview.tab("Clipboard"), length=clip_history_length)
 
 with keyboard.GlobalHotKeys({'<cmd_l>+v': app.show_window}) as hotkeys:
     app.mainloop()
